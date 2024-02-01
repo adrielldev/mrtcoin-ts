@@ -1,2 +1,2 @@
-# naivecoin-ts
+# mrtcoin-ts
 Cryptocurrency in typescript
