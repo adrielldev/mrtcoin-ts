@@ -1,6 +1,6 @@
 import * as CryptoJS from 'crypto-js';
 
-class Block {
+export class Block {
 
     public index: number;
     public hash: string;
@@ -25,12 +25,12 @@ const genesisBlock:Block = new Block(
 
 let blockchain: Block[] = [genesisBlock];
 
-const getBlockchain = ():Block[] => blockchain;
+export const getBlockchain = ():Block[] => blockchain;
 
-const getLatestBlock = ():Block => blockchain[blockchain.length - 1]
+export const getLatestBlock = ():Block => blockchain[blockchain.length - 1]
 
 
-const generateNextBlock = (blockData:string):Block => {
+export const generateNextBlock = (blockData:string):Block => {
     const previousBlock: Block = getLatestBlock()
     const nextIndex:number = previousBlock.index + 1;
     const nextTimeStamp:number = new Date().getTime() / 1000;
@@ -49,7 +49,7 @@ const addBlock = (newBlock:Block) =>{
     }
 }
 
-const isValidBlockStructure = (block: Block): boolean => {
+export const isValidBlockStructure = (block: Block): boolean => {
     return typeof block.index === 'number'
         && typeof block.hash === 'string'
         && typeof block.previousHash === 'string'
@@ -98,7 +98,7 @@ const isValidChain = (blockchainToValidate:Block[]): boolean => {
 
 }
 
-const addBlockToChain = (newBlock:Block):boolean => {
+export const addBlockToChain = (newBlock:Block):boolean => {
     if(isValidNewBlock(newBlock,getLatestBlock())){
         blockchain.push(newBlock);
         return true;
@@ -106,7 +106,7 @@ const addBlockToChain = (newBlock:Block):boolean => {
     return false;
 }
 
-const replaceChain = (newBlocks:Block[]) => {
+export const replaceChain = (newBlocks:Block[]) => {
     if(isValidChain(newBlocks) && newBlocks.length > getBlockchain().length) {
         console.log('Received blockchain is valid. replacing current blockchain with received blockchain')
         blockchain = newBlocks; 
